@@ -44,7 +44,7 @@
         class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
         <!-- 日期格式转换 -->  
         <property name="webBindingInitializer">  
-            <bean class="com.tdedu.bu.interceptor.DateConverter" />  
+            <bean class="com.dream.interceptor.DateConverter" />  
         </property>  
     </bean>  
      <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
@@ -66,7 +66,7 @@
     <bean id="exceptionHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
     </bean>
 
-<!--     <bean class="com.github.zhangkaitao.shiro.chapter16.web.exception.DefaultExceptionHandler"/> -->
+    <bean class="com.dream.web.exception.DefaultExceptionHandler"/>
 
     <import resource="spring-mvc-shiro.xml"/>    
         

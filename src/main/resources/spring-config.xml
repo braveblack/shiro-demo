@@ -83,8 +83,8 @@
         <property name="maxUploadSize" value="100000000" /><!-- 100M -->  
     </bean> 
 	
-<!--     <bean class="com.github.zhangkaitao.shiro.spring.SpringUtils"/> -->
+    <bean class="com.dream.util.SpringUtils"/> 
 
     <import resource="classpath:spring-config-cache.xml"/>
-<!--     <import resource="classpath:spring-config-shiro.xml"/> -->
+    <import resource="classpath:spring-config-shiro.xml"/>
 </beans>

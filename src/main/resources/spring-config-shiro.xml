@@ -100,7 +100,7 @@
         <property name="loginUrl" value="/login"/>
     </bean>
 
-<!--     <bean id="sysUserFilter" class="com.github.zhangkaitao.shiro.chapter16.web.shiro.filter.SysUserFilter"/> -->
+    <bean id="sysUserFilter" class="com.dream.web.shiro.filter.SysUserFilter"/> 
 
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -109,7 +109,7 @@
         <property name="filters">
             <util:map>
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
-<!--                 <entry key="sysUser" value-ref="sysUserFilter"/> -->
+                 <entry key="sysUser" value-ref="sysUserFilter"/> 
             </util:map>
         </property>
         <property name="filterChainDefinitions">
