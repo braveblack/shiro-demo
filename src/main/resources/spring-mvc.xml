@@ -1,1 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd ">
+	
+	<!--  <bean  
+    class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+    <property name="messageConverters">  
+        <list>  
+            <bean  
+                class="org.springframework.http.converter.StringHttpMessageConverter">  
+                <property name="supportedMediaTypes">  
+                    <list>  
+                        <bean class="org.springframework.http.MediaType">  
+                            <constructor-arg index="0" value="text" />  
+                            <constructor-arg index="1" value="plain" />  
+                            <constructor-arg index="2" value="UTF-8" />  
+                        </bean>  
+                    </list>  
+                </property>  
+            </bean>  
+        </list>  
+    </property>  
+</bean>  -->
+
+
+	<!-- 1. 包扫描 controller -->
+	<context:component-scan base-package="com.dream.controller"/>
+	
+ 	<bean  
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+        <!-- 日期格式转换 -->  
+        <property name="webBindingInitializer">  
+            <bean class="com.tdedu.bu.interceptor.DateConverter" />  
+        </property>  
+    </bean>  
+     <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
+    <mvc:default-servlet-handler/>
+
+    <!-- 静态资源映射 -->
+    <mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>
+
+
+    <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
+    <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="contentType" value="text/html"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 控制器异常处理 -->
+    <bean id="exceptionHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
+    </bean>
+
+<!--     <bean class="com.github.zhangkaitao.shiro.chapter16.web.exception.DefaultExceptionHandler"/> -->
+
+    <import resource="spring-mvc-shiro.xml"/>    
+        
+</beans>

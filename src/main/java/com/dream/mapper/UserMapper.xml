@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dream.dao.UserDao">
+	<resultMap type="com.dream.entity.User" id="userRM">
+		<id property="id" column="id"/>
+		<result property="organizationId" column="organization_id"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="salt" column="salt"/>
+		<result property="roleIds" column="role_ids"/>
+		<result property="locked" column="locked"/>
+	</resultMap>
+	<insert id="createUser" parameterType="com.dream.entity.User">
+		insert into sys_user(organization_id, username, password, salt, role_ids, locked) 
+		values (#{organizationId},#{username},#{password},#{salt},#{roleIds},#{locked})
+	</insert>
+	<update id="updateUser" parameterType="com.dream.entity.User" >
+		update sys_user 
+		<set>
+			<if test="organizationId != null">organization_id=#{organizationId},</if>
+			<if test="username != null">username=#{username},</if>
+			<if test="password != null">password=#{password},</if>
+			<if test="salt != null">salt=#{salt},</if>
+			<if test="roleIds != null">role_ids=#{roleIds},</if>
+			<if test="locked != null">locked=#{locked},</if>
+		</set>
+		where id =#{id}
+	</update>
+	<delete id="deleteUser" parameterType="Long">
+		delete from sys_user
+		where id in
+<!-- 		<foreach collection="array" item="id" open="(" close=")" separator=","> -->
+			#{id}
+<!-- 		</foreach> -->
+	</delete>
+	<select id="findOne" parameterType="Long" resultMap="userRM">
+		select * from sys_user where id =#{id}
+	</select>
+	<select id="findAll" resultMap="userRM">
+		select * from sys_user 
+	</select>
+	<select id="findByUsername" parameterType="string" resultMap="userRM">
+		select * from sys_user where username=#{username}
+	</select>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dream.dao.RoleDao">
+	<resultMap type="com.dream.entity.Role" id="roleRM">
+		<id property="id" column="id"/>
+		<result property="role" column="role"/>
+		<result property="description" column="description"/>
+		<result property="resourceIds" column="role_ids"/>
+		<result property="available" column="available"/>
+	</resultMap>
+	<insert id="createRole" parameterType="com.dream.entity.Role">
+		insert into sys_role(role,description,role_ids,available) values(
+		#{role},#{description},#{role_ids},#{available})
+	</insert>
+	<update id="updateRole" parameterType="com.dream.entity.Role">
+		update sys_role 
+		<set>
+			<if test="role != null">role=#{role},</if>
+			<if test="description != null">description=#{description},</if>
+			<if test="resourceIds != null">resourceIds=#{resourceIds},</if>
+			<if test="available != null">available=#{available}</if>
+		</set>
+		where id=#{id}
+	</update>
+	<delete id="deleteRole" parameterType="long">
+		delete from sys_role where id =#{id}
+	</delete>
+	<select id="findOne" parameterType="long" resultMap="roleRM">
+		select * from sys_role where id=#{id}
+	</select>
+	<select id="findAll" resultMap="roleRM">
+		select * from sys_role
+	</select>
+</mapper>

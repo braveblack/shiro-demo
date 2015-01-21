@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dream.dao.ResourceDao">
+	<resultMap type="com.dream.entity.Resource" id="resourceRM">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="type" column="type"/>
+		<result property="url" column="url"/>
+		<result property="permission" column="permission"/>
+		<result property="parentId" column="parent_id"/>
+		<result property="parentIds" column="parent_ids"/>
+		<result property="available" column="available"/>
+	</resultMap>
+	<insert id="createResource" parameterType="com.dream.entity.Resource">
+		insert into sys_resource(name,type,url,permission,parent_id,parent_ids,available) values
+		(#{name},#{type},#{url},#{permission},#{parentId},#{parentIds},#{available})
+	</insert>
+	<update id="updateResource" parameterType="com.dream.entity.Resource">
+		update sys_resource 
+		<set>
+			<if test="name != null">name=#{name}</if>
+			<if test="type != null">type=#{type}</if>
+			<if test="url != null">url=#{url}</if>
+			<if test="permission != null">permission=#{permission}</if>
+			<if test="parentId != null">parent_id=#{parentId}</if>
+			<if test="parentIds != null">parent_ids=#{parentIds}</if>
+			<if test="available != null">available=#{available}</if>
+		</set>
+			where id=#{id}
+	</update>
+	<delete id="deleteResource" parameterType="long">
+		delete from sys_resource where id=#{id}
+	</delete>
+	<select id="findOne" parameterType="long" resultMap="resourceRM">
+		select * from sys_resource where id=#{id}
+	</select>
+	<select id="findAll" resultMap="resourceRM">
+		select * from sys_resource
+	</select>
+</mapper>
