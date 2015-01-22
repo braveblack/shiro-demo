@@ -56,11 +56,12 @@
 		<property name="basename" value="/WEB-INF/messages" />
 		<property name="cacheSeconds" value="3000" />
 	</bean>
+	<bean id="springContextUtil" class="com.dream.util.SpringContextUtil"></bean>
 	<!-- 5. 事务 -->
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-	
+<!-- 	 <bean class="com.dream.util.SpringUtils"/>  -->
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
 			<tx:method name="insert*" propagation="REQUIRED"/>
@@ -83,8 +84,8 @@
         <property name="maxUploadSize" value="100000000" /><!-- 100M -->  
     </bean> 
 	
-    <bean class="com.dream.util.SpringUtils"/> 
+   
 
     <import resource="classpath:spring-config-cache.xml"/>
-    <import resource="classpath:spring-config-shiro.xml"/>
+<!--     <import resource="classpath:spring-config-shiro.xml"/> -->
 </beans>
