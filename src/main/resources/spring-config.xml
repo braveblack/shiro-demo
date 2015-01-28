@@ -51,6 +51,18 @@
 		<property name="mapperInterface" value="com.dream.dao.UserDao"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
+	<bean id="roleDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.dream.dao.RoleDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	<bean id="resourceDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.dream.dao.ResourceDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	<bean id="organizationDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.dream.dao.OrganizationDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
 	<!--5. Application Message Bundle -->
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="/WEB-INF/messages" />
@@ -87,5 +99,5 @@
    
 
     <import resource="classpath:spring-config-cache.xml"/>
-<!--     <import resource="classpath:spring-config-shiro.xml"/> -->
+    <import resource="classpath:spring-config-shiro.xml"/>
 </beans>
