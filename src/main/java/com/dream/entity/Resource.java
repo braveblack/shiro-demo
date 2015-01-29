@@ -6,9 +6,11 @@ public class Resource implements Serializable {
     private Long id; //编号
     private String name; //资源名称
     private ResourceType type = ResourceType.menu; //资源类型
+    private StateType state=StateType.open;
     private String url; //资源路径
     private String permission; //权限字符串
-    private Long parentId; //父编号
+    private String iconCls;//图标样式
+	private Long parentId; //父编号
     private String parentIds; //父编号列表
     private Boolean available = Boolean.FALSE;
 
@@ -24,6 +26,18 @@ public class Resource implements Serializable {
             return info;
         }
     }
+    public static enum StateType {
+        open("open"), closed("closed");
+
+        private final String info;
+        private StateType(String info) {
+            this.info = info;
+        }
+
+        public String getInfo() {
+            return info;
+        }
+    }
     public Long getId() {
         return id;
     }
@@ -31,6 +45,15 @@ public class Resource implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    public String getIconCls() {
+		return iconCls;
+	}
+
+	public void setIconCls(String iconCls) {
+		this.iconCls = iconCls;
+	}
+
 
     public String getName() {
         return name;
@@ -75,8 +98,17 @@ public class Resource implements Serializable {
     public String getParentIds() {
         return parentIds;
     }
+    
 
-    public void setParentIds(String parentIds) {
+    public StateType getState() {
+		return state;
+	}
+
+	public void setState(StateType state) {
+		this.state = state;
+	}
+
+	public void setParentIds(String parentIds) {
         this.parentIds = parentIds;
     }
 

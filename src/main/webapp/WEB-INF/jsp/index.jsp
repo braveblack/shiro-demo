@@ -8,10 +8,6 @@
 <title>主页</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/js/jquery-easyui-1.4.1/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/js/jquery-easyui-1.4.1/themes/icon.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-1.11.1.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js">
-</script>
 </head>
 <body  class="easyui-layout">
 <div region="north" style="height: 70px;">
@@ -34,5 +30,39 @@
 <div region="west" style="width: 160px;padding: 5px;" title="导航菜单" split="true">
 <ul id="tree" class="easyui-tree"></ul>
 </div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js">
+</script>
+<script type="text/javascript">
+$(function(){
+	$("#tree").tree({
+		lines:true,
+		url:'${pageContext.request.contextPath}/menu/listMenu',
+		onLoadSuccess:function(){
+			$("#tree").tree('expandAll');
+		},
+		onClick:function(node){
+			 if(node.attributes.authPath){
+				openTab(node);
+			}
+		}
+	});
+	function openTab(node){
+		if($("#tabs").tabs("exists",node.text)){
+			$("#tabs").tabs("select",node.text);
+		}else{
+			var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src="+node.attributes.authPath+"></iframe>"
+			$("#tabs").tabs("add",{
+				title:node.text,
+				iconCls:node.iconCls,
+				closable:true,
+				content:content
+			});
+		}
+	}
+})
+	
+</script>
 </body>
 </html>

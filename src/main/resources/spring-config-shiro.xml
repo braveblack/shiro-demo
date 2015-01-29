@@ -100,7 +100,7 @@
         <property name="loginUrl" value="/account/login"/>
     </bean>
 
-    <bean id="sysUserFilter" class="com.dream.web.shiro.filter.SysUserFilter"/>
+    <bean id="sysUserFilter" class="com.dream.web.filter.SysUserFilter"/>
 
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">

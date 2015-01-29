@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id property="id" column="id"/>
 		<result property="role" column="role"/>
 		<result property="description" column="description"/>
-		<result property="resourceIds" column="role_ids"/>
+		<result property="resourceIds" column="resource_ids"/>
 		<result property="available" column="available"/>
 	</resultMap>
 	<insert id="createRole" parameterType="com.dream.entity.Role">

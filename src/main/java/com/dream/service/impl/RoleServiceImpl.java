@@ -37,7 +37,7 @@ public class RoleServiceImpl implements RoleService {
 		for(long roleId:roleIds){
 			Role role=roleDao.findOne(roleId);
 			if(role!=null){
-				resourceIds.addAll(stringUtil.StringToList(role.getResourceIds(), ","));
+				resourceIds.addAll(stringUtil.StringToList(role.getResourceIds(),","));
 			}
 		}
 	    return resourceService.findPermissions(resourceIds);

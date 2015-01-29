@@ -17,4 +17,13 @@ public class UserDaoTest {
 		user.setUsername("All");
 		userDao.updateUser(user);
 	}
+	@Test
+	public void testfindByUsername(){
+		User user=userDao.findByUsername("admin");
+		System.out.println(user.getId());
+	}
+	@Test
+	public void testSplit(){
+		String[] s="1".split(",");
+	}
 }
