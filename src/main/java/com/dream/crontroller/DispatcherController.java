@@ -12,4 +12,8 @@ public class DispatcherController {
     public String index() {
         return "/index.jsp";
     }
+	@RequestMapping("/user")
+    public String userDispatcher() {
+        return "/account/accountManager.jsp";
+    }
 }

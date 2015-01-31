@@ -12,6 +12,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="roleIds" column="role_ids"/>
 		<result property="locked" column="locked"/>
 	</resultMap>
+	<resultMap type="com.dream.vo.UserVo" id="userVoRM">
+		<id property="id" column="id"/>
+		<result property="organizationId" column="organization_id"/>
+		<result property="organizationName" column="organization_Name"/>
+		<result property="username" column="username"/>
+		<result property="salt" column="salt"/>
+		<collection property="listRole" ofType="com.dream.entity.Role">
+			<id property="id" column="role_id"/>
+			<result property="role" column="role_NAME"/>
+			<result property="description" column="role_description"/>
+		</collection>
+	</resultMap>
 	<insert id="createUser" parameterType="com.dream.entity.User">
 		insert into sys_user(organization_id, username, password, salt, role_ids, locked) 
 		values (#{organizationId},#{username},#{password},#{salt},#{roleIds},#{locked})
@@ -35,11 +47,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{id}
 <!-- 		</foreach> -->
 	</delete>
-	<select id="findOne" parameterType="Long" resultMap="userRM">
-		select * from sys_user where id =#{id}
+	<select id="findOne" parameterType="Long" resultMap="userVoRM">
+	SELECT a.*,m.name AS organization_Name 
+			FROM (
+					SELECT b.*,a.role AS role_Name,a.id AS role_Id,a.description AS role_description
+						 FROM 
+						 	sys_role a,
+						 	sys_user b,
+						 	role_user c 
+						 WHERE 
+						 		a.id=c.role_id 
+						 AND 	b.id=c.user_id) a,
+				sys_organization m
+			WHERE a.organization_id=m.id  and a.id=#{id}
 	</select>
-	<select id="findAll" resultMap="userRM">
-		select * from sys_user 
+	<select id="findAll" resultMap="userVoRM">
+		SELECT a.*,m.name AS organization_Name 
+			FROM (
+					SELECT b.*,a.role AS role_Name,a.id AS role_Id,a.description AS role_description
+						 FROM 
+						 	sys_role a,
+						 	sys_user b,
+						 	role_user c 
+						 WHERE 
+						 		a.id=c.role_id 
+						 AND 	b.id=c.user_id) a,
+				sys_organization m
+			WHERE a.organization_id=m.id  
 	</select>
 	<select id="findByUsername" parameterType="string" resultMap="userRM">
 		select * from sys_user where username=#{username}

@@ -52,7 +52,7 @@ $(function(){
 		if($("#tabs").tabs("exists",node.text)){
 			$("#tabs").tabs("select",node.text);
 		}else{
-			var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src="+node.attributes.authPath+"></iframe>"
+			var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src=${pageContext.request.contextPath}"+node.attributes.authPath+"></iframe>"
 			$("#tabs").tabs("add",{
 				title:node.text,
 				iconCls:node.iconCls,

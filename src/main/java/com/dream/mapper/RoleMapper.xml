@@ -7,19 +7,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id property="id" column="id"/>
 		<result property="role" column="role"/>
 		<result property="description" column="description"/>
-		<result property="resourceIds" column="resource_ids"/>
 		<result property="available" column="available"/>
 	</resultMap>
 	<insert id="createRole" parameterType="com.dream.entity.Role">
-		insert into sys_role(role,description,role_ids,available) values(
-		#{role},#{description},#{role_ids},#{available})
+		insert into sys_role(role,description,available) values(
+		#{role},#{description},#{available})
 	</insert>
 	<update id="updateRole" parameterType="com.dream.entity.Role">
 		update sys_role 
 		<set>
 			<if test="role != null">role=#{role},</if>
 			<if test="description != null">description=#{description},</if>
-			<if test="resourceIds != null">resourceIds=#{resourceIds},</if>
 			<if test="available != null">available=#{available}</if>
 		</set>
 		where id=#{id}
