@@ -9,7 +9,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="username" column="username"/>
 		<result property="password" column="password"/>
 		<result property="salt" column="salt"/>
-		<result property="roleIds" column="role_ids"/>
 		<result property="locked" column="locked"/>
 	</resultMap>
 	<resultMap type="com.dream.vo.UserVo" id="userVoRM">

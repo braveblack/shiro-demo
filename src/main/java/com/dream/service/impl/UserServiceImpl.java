@@ -39,7 +39,6 @@ public class UserServiceImpl implements UserService {
 	 * @see com.dream.service.UserService#findPermissions(java.lang.String)
 	 */
 	public Set<String> findPermissions(String username) {
-		StringUtil stringUtil=new StringUtil();
 		User user=userDao.findByUsername(username);
 		List<Role> roles=userDao.findOne(user.getId()).getListRole();
 		long[] ids=new long[roles.size()];

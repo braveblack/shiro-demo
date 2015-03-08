@@ -12,6 +12,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="parentId" column="parent_id"/>
 		<result property="parentIds" column="parent_ids"/>
 		<result property="available" column="available"/>
+		<result property="iconCls" column="iconcls"/>
+		<result property="state" column="state"/>
 	</resultMap>
 	<insert id="createResource" parameterType="com.dream.entity.Resource">
 		insert into sys_resource(name,type,url,permission,parent_id,parent_ids,available) values

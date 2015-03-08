@@ -9,6 +9,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="description" column="description"/>
 		<result property="available" column="available"/>
 	</resultMap>
+	<resultMap type="com.dream.vo.RoleVo" id="roleVo">
+		<id property="id" column="id"/>
+		<result property="role" column="role"/>
+		<result property="description" column="description"/>
+		<result property="available" column="available"/>
+		<collection property="listResources" ofType="com.dream.entity.Resource">
+			<id property="id" column="resource_id"/>
+			<result property="name" column="name"/>
+			<result property="type" column="type"/>
+			<result property="url" column="url"/>
+			<result property="permission" column="permission"/>
+			<result property="parentId" column="parent_id"/>
+			<result property="parentIds" column="parent_ids"/>
+			<result property="available" column="available"/>
+			<result property="iconCls" column="iconcls"/>
+			<result property="state" column="state"/>
+		</collection>
+	</resultMap>
 	<insert id="createRole" parameterType="com.dream.entity.Role">
 		insert into sys_role(role,description,available) values(
 		#{role},#{description},#{available})
@@ -25,8 +43,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteRole" parameterType="long">
 		delete from sys_role where id =#{id}
 	</delete>
-	<select id="findOne" parameterType="long" resultMap="roleRM">
-		select * from sys_role where id=#{id}
+	<select id="findOne"  resultMap="roleVo">
+	SELECT c.* ,d.name,d.type,d.url,d.`parent_id`,d.`permission`,d.`available`,d.`iconCLs`,d.`state` FROM 
+			(SELECT a.*,b.`resource_id` FROM sys_role a LEFT JOIN role_resource b ON a.`id`=b.`role_id` WHERE a.id=#{roleId}) c
+	LEFT JOIN sys_resource d ON c.resource_id=d.`id`
 	</select>
 	<select id="findAll" resultMap="roleRM">
 		select * from sys_role
