@@ -47,9 +47,16 @@ $(function(){
 		columns:[[
 		 {field:'ck',checkbox:true},
 		 {title:"名字",  field:"username", width:40},
-		 {title:"所属公司",  field:"organizationId", width:40},
-		 {title:"角色",field:"roleIds",width:40}
-		 ]]
+		 {title:"所属公司",  field:"organizationName", width:40},
+		 {title:"角色",field:"listRole",width:40,
+			 formatter:function(value,row,index){
+				 var s="";
+				 for (var i=0;i<value.length;i++) {
+					s=s+value[0].role+";";
+				 }
+				 return s;
+			 }
+		 }]]
 	});
 	$('#datagrid').datagrid({
 		toolbar: '#tb'
