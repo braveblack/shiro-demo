@@ -2,11 +2,13 @@ package com.dream.service.impl;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.beust.jcommander.internal.Maps;
 import com.dream.dao.UserDao;
 import com.dream.entity.Role;
 import com.dream.entity.User;
@@ -53,6 +55,20 @@ public class UserServiceImpl implements UserService {
 	}
 	public List<UserVo> findAllAccount() {
 		return userDao.findAll();
+	}
+	public void userSave(User user, long[] roleIds) {
+		userDao.createUser(user);
+		for(long roleId:roleIds){
+			Map<String,Long> map=Maps.newHashMap();
+			map.put("userId", user.getId());
+			map.put("roleId", roleId);
+			userDao.userAndroleRelation(map);
+		}
+	}
+	//2015-03-16 先删除关系，然后在维护
+	public void userUpdate(User user, long[] roleIds) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

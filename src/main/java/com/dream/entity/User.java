@@ -4,8 +4,8 @@ package com.dream.entity;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private Long id; //编号
-    private Long organizationId; //所属公司
+    private long id; //编号
+    private long organizationId; //所属公司
     private String username; //用户名
     private String password; //密码
     private String salt; //加密密码的盐
@@ -82,22 +82,7 @@ public class User implements Serializable {
         this.locked = locked;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
-
-        if (id != null ? !id.equals(user.id) : user.id != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
 
     @Override
     public String toString() {

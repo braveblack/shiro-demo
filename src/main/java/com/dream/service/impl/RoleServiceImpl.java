@@ -45,5 +45,8 @@ public class RoleServiceImpl implements RoleService {
 		}
 	    return permissions;
 	}
+	public List<Role> findAll() {
+		return roleDao.findAll();
+	}
 	
 }

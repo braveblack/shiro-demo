@@ -23,9 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result property="description" column="role_description"/>
 		</collection>
 	</resultMap>
-	<insert id="createUser" parameterType="com.dream.entity.User">
-		insert into sys_user(organization_id, username, password, salt, role_ids, locked) 
-		values (#{organizationId},#{username},#{password},#{salt},#{roleIds},#{locked})
+	<insert id="createUser" parameterType="com.dream.entity.User" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_user(organization_id, username, password, salt,  locked) 
+		values (#{organizationId},#{username},#{password},#{salt},#{locked})
+	</insert>
+	<insert id="userAndroleRelation" parameterType="map">
+		insert into role_user(user_id,role_id) values(#{userId},#{roleId});
 	</insert>
 	<update id="updateUser" parameterType="com.dream.entity.User" >
 		update sys_user 

@@ -16,9 +16,12 @@ public class UserDaoTest {
 	@Test
 	public void testUpdate(){
 		User user=new User();
-		user.setId(1L);
-		user.setUsername("All");
-		userDao.updateUser(user);
+		user.setUsername("fewf");
+		user.setPassword("abn");
+		user.setLocked(false);
+		user.setSalt("fewfew");
+		userDao.createUser(user);
+		System.out.println(user.getId());
 	}
 	@Test
 	public void testfindByUsername(){

@@ -16,4 +16,8 @@ public interface UserService {
 
 	public List<UserVo> findAllAccount();
 
+	public void userSave(User user, long[] roleIds);
+
+	public void userUpdate(User user, long[] roleIds);
+
 }
