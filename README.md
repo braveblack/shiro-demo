@@ -1,3 +1,3 @@
 # shiro-demo
-学习shiro的demo，参考跟我学shiro的开涛的博客
-springMVC+spring+mybatis+shiro
+学习shiro的demo，框架是
+springMVC+spring+mybatis+shiro+easyui
