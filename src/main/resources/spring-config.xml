@@ -46,6 +46,10 @@
 		<!-- 整合mybatis，包扫描 mapper文件 -->
 		<!--  <property name="configLocation" value="classpath:sqlMapConfig.xml"/>-->
 		<property name="mapperLocations" value="classpath*:com/dream/mapper/*.xml"/>
+		<property name="plugins">  
+        	<bean class="com.dream.interceptor.PageInterceptor">  
+        </bean>  
+    </property>  
 	</bean>
 	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.dream.dao.UserDao"></property>

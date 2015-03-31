@@ -16,4 +16,16 @@ public class DispatcherController {
     public String userDispatcher() {
         return "/account/accountManager.jsp";
     }
+	@RequestMapping("/organization")
+    public String organizationDispatcher() {
+        return "/organization/organizationManager.jsp";
+    }
+	@RequestMapping("/resource")
+    public String resourceDispatcher() {
+        return "/resource/resourceManager.jsp";
+    }
+	@RequestMapping("/role")
+    public String roleDispatcher() {
+        return "/role/roleManager.jsp";
+    }
 }

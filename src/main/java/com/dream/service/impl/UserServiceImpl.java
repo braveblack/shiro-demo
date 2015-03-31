@@ -1,6 +1,6 @@
 package com.dream.service.impl;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,10 +12,9 @@ import com.beust.jcommander.internal.Maps;
 import com.dream.dao.UserDao;
 import com.dream.entity.Role;
 import com.dream.entity.User;
-import com.dream.service.ResourceService;
+import com.dream.service.PasswordHelper;
 import com.dream.service.RoleService;
 import com.dream.service.UserService;
-import com.dream.util.StringUtil;
 import com.dream.vo.UserVo;
 
 @Component
@@ -25,16 +24,19 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+    private PasswordHelper passwordHelper;
 	/* 根据帐号名获取角色的字符
 	 * @see com.dream.service.UserService#findRoles(java.lang.String)
 	 */
 	public Set<String> findRoles(String username) {
-		StringUtil stringUtil=new StringUtil();
 		User user=userDao.findByUsername(username);
-		if(user == null) {
-            return Collections.EMPTY_SET;
-        }
-        return roleService.findRoles(stringUtil.stringToLong(user.getRoleIds(), ","));
+		UserVo userVo=userDao.findOne(user.getId());
+		Set<String> setRoles=new HashSet<String>();
+		for(Role role:userVo.getListRole()){
+			setRoles.add(role.getRole());
+		}
+        return setRoles;
 	}
 	/*
 	 * 根据帐号名获取角权限的字符串
@@ -57,6 +59,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.findAll();
 	}
 	public void userSave(User user, long[] roleIds) {
+		 passwordHelper.encryptPassword(user);
 		userDao.createUser(user);
 		for(long roleId:roleIds){
 			Map<String,Long> map=Maps.newHashMap();

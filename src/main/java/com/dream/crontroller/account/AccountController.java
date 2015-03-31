@@ -58,4 +58,5 @@ public class AccountController {
 	        model.addAttribute("error", error);
 	        return "/login.jsp";
 	}
+	
 }

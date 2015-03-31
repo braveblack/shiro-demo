@@ -37,7 +37,7 @@ public class ResourceServiceImpl implements ResourceService {
 		return permissions;
 	}
 	
-	private List<Resource> findAll() {
+	public List<Resource> findAll() {
 		return resourceDao.findAll();
 	}
 	 /*
